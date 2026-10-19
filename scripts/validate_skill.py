@@ -44,11 +44,8 @@ def validate_frontmatter(skill: Path, errors: list[str]) -> None:
     name_match = re.search(r"^name:\s*(\S+)\s*$", frontmatter, re.MULTILINE)
     if not name_match:
         errors.append("SKILL.md is missing a scalar name field")
-    elif name_match.group(1) != skill.parent.name:
-        errors.append(
-            f"skill name {name_match.group(1)!r} does not match folder "
-            f"{skill.parent.name!r}"
-        )
+    elif not re.fullmatch(r"[a-z0-9-]{1,63}", name_match.group(1)):
+        errors.append("SKILL.md name must use lowercase letters, digits, and hyphens")
     if not re.search(r"^description:\s*", frontmatter, re.MULTILINE):
         errors.append("SKILL.md is missing a description field")
     if not body:
