@@ -1,0 +1,3 @@
+interface:
+  display_name: "Claude Account Recovery"
+  short_description: "Recover Claude sessions, exports, and research files"
